@@ -38,39 +38,10 @@ public class MainManagerBill {
                     creatNewBill(customerManager, billManager);
                     break;
                 case 5:
-                    System.out.println("Enter the code of Bill which you want to update:");
-                    Scanner inputCode = new Scanner(System.in);
-                    String code = inputCode.nextLine();
-                    Bill bill = billManager.searchById(code);
-                    if (bill !=  null) {
-                        System.out.println("Enter the old Index: ");
-                        Scanner inputOldIndex = new Scanner(System.in);
-                        int oldIndex = inputOldIndex.nextInt();
-                        System.out.println("Enter the new Index: ");
-                        Scanner inputNewIndex = new Scanner(System.in);
-                        int newIndex = inputNewIndex.nextInt();
-                        while (newIndex < oldIndex) {
-                            System.out.println("Enter the new Index again:");
-                            Scanner inputNewIndex2 = new Scanner(System.in);
-                            newIndex = inputNewIndex2.nextInt();
-                        }
-                        System.out.println("Enter the new code Bill:");
-                        Scanner inputCodeBill = new Scanner(System.in);
-                        String codeBill = inputCodeBill.nextLine();
-                        Bill bill1 = new Bill(codeBill, oldIndex, newIndex, customerManager.searchByName(bill.getCustomer().getFullName()));
-                        billManager.update(billManager.getBillList().indexOf(bill), bill1);
-                    }
+                    updateBill(customerManager, billManager);
                     break;
                 case 6:
-                    System.out.println("Enter the code of Bill you want to remove");
-                    Scanner inputCodeBill = new Scanner(System.in);
-                    String codeBill = inputCodeBill.nextLine();
-                    Bill bill1  = billManager.searchById(codeBill);
-                    if (bill1 != null) {
-                        billManager.removeByIndex(billManager.getBillList().indexOf(bill1));
-                    } else {
-                        System.out.println("No bill has that index!");
-                    }
+                    removeBillByCodeOfBill(billManager);
                     break;
                 case 7:
                     checkMoney(billManager);
@@ -91,6 +62,45 @@ public class MainManagerBill {
                     System.out.println("Enter again your choice:");
                     break;
             }
+        }
+    }
+
+    private static void removeBillByCodeOfBill(BillManager billManager) {
+        System.out.println("Enter the code of Bill you want to remove");
+        Scanner inputCodeBill = new Scanner(System.in);
+        String codeBill = inputCodeBill.nextLine();
+        Bill bill1  = billManager.searchById(codeBill);
+        if (bill1 != null) {
+            billManager.removeByIndex(billManager.getBillList().indexOf(bill1));
+        } else {
+            System.out.println("No bill has that index!");
+        }
+    }
+
+    private static void updateBill(CustomerManager customerManager, BillManager billManager) {
+        System.out.println("Enter the code of Bill which you want to update:");
+        Scanner inputCode = new Scanner(System.in);
+        String code = inputCode.nextLine();
+        Bill bill = billManager.searchById(code);
+        if (bill !=  null) {
+            System.out.println("Enter the old Index: ");
+            Scanner inputOldIndex = new Scanner(System.in);
+            int oldIndex = inputOldIndex.nextInt();
+            System.out.println("Enter the new Index: ");
+            Scanner inputNewIndex = new Scanner(System.in);
+            int newIndex = inputNewIndex.nextInt();
+            while (newIndex < oldIndex) {
+                System.out.println("Enter the new Index again:");
+                Scanner inputNewIndex2 = new Scanner(System.in);
+                newIndex = inputNewIndex2.nextInt();
+            }
+            System.out.println("Enter the new code Bill:");
+            Scanner inputCodeBill = new Scanner(System.in);
+            String codeBill = inputCodeBill.nextLine();
+            Bill bill1 = new Bill(codeBill, oldIndex, newIndex, customerManager.searchByName(bill.getCustomer().getFullName()));
+            billManager.update(billManager.getBillList().indexOf(bill), bill1);
+        } else {
+            System.out.println("No Bill has that ccode");
         }
     }
 
