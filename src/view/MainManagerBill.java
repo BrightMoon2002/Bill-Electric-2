@@ -100,7 +100,7 @@ public class MainManagerBill {
             Bill bill1 = new Bill(codeBill, oldIndex, newIndex, customerManager.searchByName(bill.getCustomer().getFullName()));
             billManager.update(billManager.getBillList().indexOf(bill), bill1);
         } else {
-            System.out.println("No Bill has that ccode");
+            System.out.println("No Bill has that code");
         }
     }
 
