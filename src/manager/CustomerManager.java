@@ -1,10 +1,10 @@
 package manager;
 
-import model.Bill;
+
 import model.Customer;
 import storage.FileManagerCustomer;
 
-import java.io.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
