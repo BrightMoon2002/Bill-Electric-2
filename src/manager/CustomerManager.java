@@ -2,6 +2,7 @@ package manager;
 
 import model.Bill;
 import model.Customer;
+import storage.FileManagerCustomer;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class CustomerManager implements IGeneralManager<Customer> {
 
     public void setCustomerList(List<Customer> customerList) {
         this.customerList = customerList;
-        writeListCustomer();
+        FileManagerCustomer.writeFile(customerList);
     }
 
     @Override
@@ -34,19 +35,19 @@ public class CustomerManager implements IGeneralManager<Customer> {
     @Override
     public void saveList(Customer customer) {
         customerList.add(customer);
-        writeListCustomer();
+       FileManagerCustomer.writeFile(customerList);
     }
 
     @Override
     public void removeByIndex(int index) {
         customerList.remove(index);
-        writeListCustomer();
+        FileManagerCustomer.writeFile(customerList);
     }
 
     @Override
     public void update(int index, Customer customer) {
         customerList.set(index, customer);
-        writeListCustomer();
+        FileManagerCustomer.writeFile(customerList);
     }
 
     @Override
@@ -78,47 +79,5 @@ public class CustomerManager implements IGeneralManager<Customer> {
         System.out.println(customerList);
     }
 
-   public void writeListCustomer()  {
-        File file = new File("CustomerList.txt");
-       try {
-           OutputStream os = new FileOutputStream(file);
-           ObjectOutputStream oos = new ObjectOutputStream(os);
-           oos.writeObject(customerList);
-
-       } catch (FileNotFoundException e) {
-           e.printStackTrace();
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
-   }
-
-   public List<Customer> readListCustomer() {
-        List<Customer> customerList = new ArrayList<>();
-        File file = new File("CustomerList.txt");
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        if (file.length() == 0) {
-            return customerList;
-        }
-       try {
-           InputStream is = new FileInputStream(file);
-           ObjectInputStream ois = new ObjectInputStream(is);
-           customerList = (List<Customer>) ois.readObject();
-           ois.close();
-
-       } catch (FileNotFoundException e) {
-           e.printStackTrace();
-       } catch (ClassNotFoundException e) {
-           e.printStackTrace();
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
-       return customerList;
-   }
 
 }
