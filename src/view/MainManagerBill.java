@@ -4,6 +4,7 @@ import manager.BillManager;
 import manager.CustomerManager;
 import model.Bill;
 import model.Customer;
+import storage.FileManagerBill;
 import storage.FileManagerCustomer;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class MainManagerBill {
         CustomerManager customerManager = new CustomerManager();
         List<Customer> customerList = FileManagerCustomer.readListCustomer();
         BillManager billManager = new BillManager();
-        List<Bill> billList = billManager.readBillList();
+        List<Bill> billList = FileManagerBill.readBillList();
         customerManager.setCustomerList(customerList);
         billManager.setBillList(billList);
         MenuOfBillElectric(customerManager, billManager);
