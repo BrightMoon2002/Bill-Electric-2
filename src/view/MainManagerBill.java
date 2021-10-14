@@ -4,6 +4,8 @@ import manager.BillManager;
 import manager.CustomerManager;
 import model.Bill;
 import model.Customer;
+import storage.FileManagerCustomer;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,7 +13,7 @@ public class MainManagerBill {
     public static void main(String[] args) {
 
         CustomerManager customerManager = new CustomerManager();
-        List<Customer> customerList = customerManager.readListCustomer();
+        List<Customer> customerList = FileManagerCustomer.readListCustomer();
         BillManager billManager = new BillManager();
         List<Bill> billList = billManager.readBillList();
         customerManager.setCustomerList(customerList);

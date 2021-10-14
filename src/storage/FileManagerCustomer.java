@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileManagerCustomer {
-    public List<Customer> readListCustomer() {
+    public static List<Customer> readListCustomer() {
         List<Customer> customerList = new ArrayList<>();
         File file = new File("CustomerList.txt");
         if (!file.exists()) {
