@@ -7,7 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileManagerCustomer {
-    public static List<Customer> readListCustomer() {
+    private static FileManagerCustomer fileManagerCustomer;
+    private FileManagerCustomer() {
+
+    }
+    public static FileManagerCustomer getInstance() {
+        if(fileManagerCustomer == null) {
+            fileManagerCustomer = new FileManagerCustomer();
+        }
+        return fileManagerCustomer;
+    }
+    public  List<Customer> readListCustomer() {
         List<Customer> customerList = new ArrayList<>();
         File file = new File("CustomerList.txt");
         if (!file.exists()) {
@@ -36,7 +46,7 @@ public class FileManagerCustomer {
         return customerList;
     }
 
-    public static void writeFile(List<Customer> customerList) {
+    public void writeFile(List<Customer> customerList) {
         File file = new File("CustomerList.txt");
         try {
             OutputStream os = new FileOutputStream(file);
@@ -49,4 +59,5 @@ public class FileManagerCustomer {
             e.printStackTrace();
         }
     }
+
 }

@@ -14,7 +14,8 @@ public class MainManagerBill {
     public static void main(String[] args) {
 
         CustomerManager customerManager = new CustomerManager();
-        List<Customer> customerList = FileManagerCustomer.readListCustomer();
+        FileManagerCustomer fileManagerCustomer = FileManagerCustomer.getInstance();
+        List<Customer> customerList = fileManagerCustomer.readListCustomer();
         BillManager billManager = new BillManager();
         List<Bill> billList = FileManagerBill.readBillList();
         customerManager.setCustomerList(customerList);

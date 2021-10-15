@@ -10,6 +10,7 @@ import java.util.List;
 
 public class CustomerManager implements IGeneralManager<Customer> {
     private List<Customer> customerList = new ArrayList<>();
+    private FileManagerCustomer fileManagerCustomer;
 
     public CustomerManager(List<Customer> customerList) {
         this.customerList = customerList;
@@ -24,7 +25,7 @@ public class CustomerManager implements IGeneralManager<Customer> {
 
     public void setCustomerList(List<Customer> customerList) {
         this.customerList = customerList;
-        FileManagerCustomer.writeFile(customerList);
+        fileManagerCustomer.writeFile(customerList);
     }
 
     @Override
@@ -35,19 +36,19 @@ public class CustomerManager implements IGeneralManager<Customer> {
     @Override
     public void saveList(Customer customer) {
         customerList.add(customer);
-       FileManagerCustomer.writeFile(customerList);
+       fileManagerCustomer.writeFile(customerList);
     }
 
     @Override
     public void removeByIndex(int index) {
         customerList.remove(index);
-        FileManagerCustomer.writeFile(customerList);
+        fileManagerCustomer.writeFile(customerList);
     }
 
     @Override
     public void update(int index, Customer customer) {
         customerList.set(index, customer);
-        FileManagerCustomer.writeFile(customerList);
+        fileManagerCustomer.writeFile(customerList);
     }
 
     @Override
